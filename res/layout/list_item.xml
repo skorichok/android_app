@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="1dip"
+              android:layout_marginRight="5dip"
+              android:layout_marginLeft="5dip"
+                >
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <ImageView android:id="@+id/exerciseIcon"
+                   android:layout_width="20dp"
+                   android:layout_height="20dp"
+                   android:layout_marginTop="2dip"
+                   android:layout_marginLeft="2dip"
+                   android:layout_marginRight="5dp"
+                />
+        <TextView
+                android:id="@+id/lblListItem"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:textColor="#65849C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+    </TableRow>
+
+</TableLayout>

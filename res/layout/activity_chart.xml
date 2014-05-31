@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" android:background="@drawable/calendar_fon" android:paddingTop="20dp">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cusom Chart"
+            android:id="@+id/textView" android:layout_marginBottom="30dp" android:textSize="35dp"
+            android:textColor="@color/Black" android:layout_marginLeft="30dp"/>
+    <com.skoryk.gymhelper.custom.PieGraph
+            android:id="@+id/pieChart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+</LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ***************Database creation ******************************************************************** -->
+
+    <string name="createExercises">create table exercises (id integer primary key autoincrement, name text, rate integer default 0);</string>
+    <string-array name="initExercises">
+        <item>insert into exercises (name) values(\'Squat\');</item>
+        <item>insert into exercises (name) values(\'Leg press\');</item>
+        <item>insert into exercises (name) values(\'Leg pa pa pa\');</item>
+        <item>insert into exercises (name) values(\'Leg extension\');</item>
+        <item>insert into exercises (name) values(\'HyperExtension\');</item>
+        <item>insert into exercises (name) values(\'Axle Deadlift\');</item>
+        <item>insert into exercises (name) values(\'Barbell Rear Delt Row\');</item>
+        <item>insert into exercises (name) values(\'Barbell Shrug\');</item>
+        <item>insert into exercises (name) values(\'Barbell Squat\');</item>
+        <item>insert into exercises (name) values(\'Bent Over Two-Arm Long Bar Row\');</item>
+    </string-array>
+
+    <string name="createPlanTraining">
+        create table plan_training (
+            id integer primary key autoincrement,
+            name text,
+            is_current bit);
+    </string>
+
+    <string name="createProgramExercises">
+        create table program_exercises (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date TEXT,
+            time TEXT,
+            exercise_id INTEGER,
+            training_number INTEGER DEFAULT 1);
+    </string>
+
+    <string name="createSets">
+        create table sets (
+            program_exercise_id INTEGER,
+            set_number INTEGER,
+            reps INTEGER,
+            weight INTEGER);
+    </string>
+
+    <!-- ***************Dao queries ******************************************************************** -->
+    <string name="getProgramExercisesByDate">
+        select
+            pe.id as id,
+            e.id as exerciseId,
+            e.name as exerciseName,
+            pe.date as date,
+            pe.time as time,
+            pe.training_number as trainingNumber
+        from program_exercises pe inner join exercises e on e.id = pe.exercise_id
+        where pe.date = ?
+    </string>
+
+    <string name="getProgramExercisesById">
+        select
+            pe.id as id,
+            e.id as exerciseId,
+            e.name as exerciseName,
+            pe.date as date,
+            pe.time as time,
+            pe.training_number as trainingNumber
+        from program_exercises pe inner join exercises e on e.id = pe.exercise_id
+        where pe.id = ?
+    </string>
+
+    <string name="getProgramExercisesSets">
+        select
+            program_exercise_id,
+            set_number,
+            reps,
+            weight
+        from sets
+        where program_exercise_id = ?
+    </string>
+</resources>

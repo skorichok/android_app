@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" android:background="@drawable/calendar_fon" android:paddingTop="20dp">
+
+    <TextView
+            android:layout_width="184dp"
+            android:layout_height="55dp"
+            android:text="Edit Day No "
+            android:id="@+id/textView" android:textSize="25dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="53dp"
+            android:text="New Text"
+            android:id="@+id/dayNumber" android:textSize="25dp"/>
+</LinearLayout>
