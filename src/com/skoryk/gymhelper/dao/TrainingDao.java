@@ -7,9 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.skoryk.gymhelper.entity.Training;
 import com.skoryk.gymhelper.utils.Formats;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class TrainingDao {

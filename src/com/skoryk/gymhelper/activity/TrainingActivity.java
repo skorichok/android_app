@@ -113,12 +113,12 @@ public class TrainingActivity extends Activity {
         adapter.notifyDataSetChanged();
     }
 
-//    @Override
-//    public void onResume() {
-//        adapter.clear();
-//        exercises = programExerciseDao.getProgramExercisesByTrainingId(trainingId);
-//        adapter.addAll(exercises);
-//        adapter.notifyDataSetChanged();
-//        super.onResume();
-//    }
+    @Override
+    public void onResume() {
+        adapter.clear();
+        exercises = programExerciseDao.getProgramExercisesByTrainingId(trainingId);
+        adapter.addAll(exercises);
+        adapter.notifyDataSetChanged();
+        super.onResume();
+    }
 }
