@@ -20,5 +20,7 @@
         <activity android:name=".activity.DayActivity"/>
         <activity android:name=".activity.TrainingActivity" android:label="Edit Training"/>
         <activity android:name=".activity.EditProgramExerciseActivity" android:label="Edit Exercise"/>
+        <activity android:name=".activity.WelcomeActivity" android:label="Welcome"/>
+        <activity android:name=".activity.HomePageActivity" android:label="Home"/>
     </application>
 </manifest>

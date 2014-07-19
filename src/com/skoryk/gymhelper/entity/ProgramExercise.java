@@ -1,15 +1,15 @@
 package com.skoryk.gymhelper.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 public class ProgramExercise {
     private Integer id;
     private Exercise exercise;
     private Date date;
     private String time;
-    private Integer trainingNumber;
+    private Integer trainingId;
+    private ArrayList<Set> sets;
 
     public Integer getId() {
         return id;
@@ -43,11 +43,27 @@ public class ProgramExercise {
         this.time = time;
     }
 
-    public Integer getTrainingNumber() {
-        return trainingNumber;
+    public Integer getTrainingId() {
+        return trainingId;
     }
 
-    public void setTrainingNumber(Integer trainingNumber) {
-        this.trainingNumber = trainingNumber;
+    public void setTrainingId(Integer trainingNumber) {
+        this.trainingId = trainingNumber;
+    }
+
+    public ArrayList<Set> getSets() {
+        return sets;
+    }
+
+    public void setSets(ArrayList<Set> sets) {
+        this.sets = sets;
+    }
+
+    public int getSetsCount() {
+        if (null != sets) {
+            return sets.size();
+        }
+
+        return 0;
     }
 }

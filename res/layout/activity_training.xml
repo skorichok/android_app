@@ -10,13 +10,15 @@
             android:baselineAligned="false"
             android:gravity="center_horizontal"
             android:id="@+id/orange_header">
-        <ImageView
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView"
-                android:src="@drawable/exercises_text"
-                android:layout_marginTop="10dp"
-                android:focusableInTouchMode="false"/>
+                android:text="Exercises"
+                android:textColor="#ffffff"
+                android:textSize="32dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/header_text"
+                android:layout_centerHorizontal="true"/>
     </LinearLayout>
 
     <TextView

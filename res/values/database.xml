@@ -17,11 +17,11 @@
         <item>insert into exercises (name) values(\'Bent Over Two-Arm Long Bar Row\');</item>
     </string-array>
 
-    <string name="createPlanTraining">
-        create table plan_training (
+    <string name="createTrainings">
+        create table trainings (
             id integer primary key autoincrement,
-            name text,
-            is_current bit);
+            date TEXT,
+            is_finished bit DEFAULT 0);
     </string>
 
     <string name="createProgramExercises">
@@ -30,7 +30,7 @@
             date TEXT,
             time TEXT,
             exercise_id INTEGER,
-            training_number INTEGER DEFAULT 1);
+            training_id INTEGER);
     </string>
 
     <string name="createSets">
@@ -42,16 +42,16 @@
     </string>
 
     <!-- ***************Dao queries ******************************************************************** -->
-    <string name="getProgramExercisesByDate">
+    <string name="getProgramExercisesByTrainingId">
         select
             pe.id as id,
             e.id as exerciseId,
             e.name as exerciseName,
             pe.date as date,
             pe.time as time,
-            pe.training_number as trainingNumber
+            pe.training_id
         from program_exercises pe inner join exercises e on e.id = pe.exercise_id
-        where pe.date = ?
+        where pe.training_id = ?
     </string>
 
     <string name="getProgramExercisesById">
@@ -61,12 +61,12 @@
             e.name as exerciseName,
             pe.date as date,
             pe.time as time,
-            pe.training_number as trainingNumber
+            pe.training_id
         from program_exercises pe inner join exercises e on e.id = pe.exercise_id
         where pe.id = ?
     </string>
 
-    <string name="getProgramExercisesSets">
+    <string name="getProgramExerciseSets">
         select
             program_exercise_id,
             set_number,

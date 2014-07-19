@@ -40,7 +40,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
 
             holder = new ExerciseHolder();
             holder.imgIcon = (ImageView) row.findViewById(R.id.imgIcon);
-            holder.txtTitle = (TextView) row.findViewById(R.id.txtTitle);
+            holder.txtTitle = (TextView) row.findViewById(R.id.exerciseName);
 
             row.setTag(holder);
         } else {

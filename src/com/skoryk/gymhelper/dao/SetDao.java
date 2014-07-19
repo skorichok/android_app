@@ -5,15 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.skoryk.gymhelper.R;
-import com.skoryk.gymhelper.entity.Exercise;
-import com.skoryk.gymhelper.entity.ProgramExercise;
 import com.skoryk.gymhelper.entity.Set;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class SetDao {
     private Context context;
@@ -27,7 +21,7 @@ public class SetDao {
     }
 
     public ArrayList<Set> getExercisesSets(Integer programExerciseId) {
-        String query = context.getResources().getString(R.string.getProgramExercisesSets);
+        String query = context.getResources().getString(R.string.getProgramExerciseSets);
         Cursor c = db.rawQuery(query, new String[]{programExerciseId.toString()});
 
         ArrayList<Set> result = new ArrayList<Set>();

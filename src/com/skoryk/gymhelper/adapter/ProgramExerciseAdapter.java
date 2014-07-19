@@ -2,7 +2,6 @@ package com.skoryk.gymhelper.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.skoryk.gymhelper.R;
-import com.skoryk.gymhelper.entity.Exercise;
 import com.skoryk.gymhelper.entity.ProgramExercise;
 
 import java.util.ArrayList;
@@ -44,7 +42,8 @@ public class ProgramExerciseAdapter extends ArrayAdapter<ProgramExercise> {
 
             holder = new ProgramExerciseHolder();
             holder.imgIcon = (ImageView) row.findViewById(R.id.imgIcon);
-            holder.txtTitle = (TextView) row.findViewById(R.id.txtTitle);
+            holder.txtTitle = (TextView) row.findViewById(R.id.exerciseName);
+            holder.setsCount = (TextView) row.findViewById(R.id.setsCount);
 
             row.setTag(holder);
         } else {
@@ -53,6 +52,11 @@ public class ProgramExerciseAdapter extends ArrayAdapter<ProgramExercise> {
 
         ProgramExercise exercise = data.get(position);
         holder.txtTitle.setText(exercise.getExercise().getName());
+        if (exercise.getSetsCount() != 0) {
+            holder.setsCount.setText("(" + exercise.getSetsCount() + ")");
+        } else {
+            holder.setsCount.setText("");
+        }
         int j = ((Activity) context).getResources().getIdentifier("dumbbel", "drawable", ((Activity) context).getPackageName());
         holder.imgIcon.setImageResource(j);
 
@@ -62,5 +66,6 @@ public class ProgramExerciseAdapter extends ArrayAdapter<ProgramExercise> {
     static class ProgramExerciseHolder {
         ImageView imgIcon;
         TextView txtTitle;
+        TextView setsCount;
     }
 }

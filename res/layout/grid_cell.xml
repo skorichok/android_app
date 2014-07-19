@@ -1,18 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="vertical"
               android:padding="5dp" >
-
-    <!--<ImageView-->
-            <!--android:id="@+id/item_image"-->
-            <!--android:layout_width="40dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:src="@drawable/gym_icon" >-->
-    <!--</ImageView>-->
-
     <TextView
             android:id="@+id/item_text"
             android:layout_width="wrap_content"
@@ -22,4 +13,15 @@
             android:textColor="#2C3539">
     </TextView>
 
-</LinearLayout>
+    <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/item_text"
+            android:layout_alignBottom="@+id/item_text"
+            android:src="@drawable/gym_icon" >
+    </ImageView>
+
+
+</RelativeLayout>

@@ -89,7 +89,7 @@ public class ExpandableActivity extends Activity {
 
 //    private void prepareListData() {
 //        ProgramExerciseDao programExerciseDao = new ProgramExerciseDao(this);
-//        listDataChild = programExerciseDao.getProgramExercises(1);
+//        listDataChild = programExerciseDao.getProgramExercisesByTrainingId(1);
 //        listDataHeader = new ArrayList<String>(listDataChild.keySet());
 //    }
 

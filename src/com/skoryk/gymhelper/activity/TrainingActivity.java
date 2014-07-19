@@ -28,18 +28,24 @@ public class TrainingActivity extends Activity {
     private List<Exercise> exerciseList;
     private ProgramExerciseDao programExerciseDao;
     private ExerciseDao exerciseDao;
-    ProgramExerciseAdapter adapter;
-    ListView exercisesListView;
-    Context context;
+    private ProgramExerciseAdapter adapter;
+    private ListView exercisesListView;
+    private Context context;
+    private int trainingId;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
+        trainingId = getIntent().getIntExtra("trainingId", 0);
+        if (trainingId == 0 ) {
+            throw new IllegalArgumentException("trainingId is null");
+        }
         context = this;
         programExerciseDao = new ProgramExerciseDao(this);
         exerciseDao = new ExerciseDao(this);
 
-        exercises = programExerciseDao.getProgramExercises(new Date());
+        exercises = programExerciseDao.getProgramExercisesByTrainingId(trainingId);
         exercisesListView = (ListView) findViewById(R.id.exercises);
         adapter = new ProgramExerciseAdapter(this,
                 R.layout.exercise_list_item, exercises);
@@ -99,14 +105,20 @@ public class TrainingActivity extends Activity {
         ProgramExercise programExercise = new ProgramExercise();
         programExercise.setExercise(exercise);
         programExercise.setDate(new Date());
-        programExercise.setTrainingNumber(1);
-        ProgramExercise programExercise1 = programExerciseDao.createProgramExercise(programExercise);
-        exercises.add(programExercise1);
+        programExercise.setTrainingId(trainingId);
+        programExerciseDao.createProgramExercise(programExercise);
+        exercises = programExerciseDao.getProgramExercisesByTrainingId(trainingId);
+        adapter.clear();
+        adapter.addAll(exercises);
         adapter.notifyDataSetChanged();
     }
 
-//    private void init(Context context) {
-//        TextView addNewExerciseText = (TextView) findViewById(R.id.add_new_exercise_text);
-//        FontUtils.setHeaderTypeFace(getAssets(), addNewExerciseText);
+//    @Override
+//    public void onResume() {
+//        adapter.clear();
+//        exercises = programExerciseDao.getProgramExercisesByTrainingId(trainingId);
+//        adapter.addAll(exercises);
+//        adapter.notifyDataSetChanged();
+//        super.onResume();
 //    }
 }

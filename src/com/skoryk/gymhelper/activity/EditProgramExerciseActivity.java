@@ -10,7 +10,6 @@ import com.skoryk.gymhelper.R;
 import com.skoryk.gymhelper.adapter.ExerciseSetsAdapter;
 import com.skoryk.gymhelper.dao.ProgramExerciseDao;
 import com.skoryk.gymhelper.dao.SetDao;
-import com.skoryk.gymhelper.dialog.EditSetDialog;
 import com.skoryk.gymhelper.entity.ProgramExercise;
 import com.skoryk.gymhelper.entity.Set;
 
@@ -30,25 +29,24 @@ public class EditProgramExerciseActivity extends Activity {
     private TextView repsValue;
     private TextView weightText;
     private TextView repsText;
+    private TextView headerText;
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_program_exercise);
+        headerText = (TextView) findViewById(R.id.header_text);
         setDao = new SetDao(this);
         programExerciseDao = new ProgramExerciseDao(this);
         Intent intent = getIntent();
         programExerciseId = intent.getIntExtra("programExerciseId", 0);
         programExercise = programExerciseDao.getProgramExerciseById(programExerciseId);
-
+        headerText.setText(programExercise.getExercise().getName());
         sets = setDao.getExercisesSets(programExerciseId);
         adapter = new ExerciseSetsAdapter(this,
                 R.layout.set_list_item, sets);
         ListView setsListView = (ListView) findViewById(R.id.sets_list_view);
         setsListView.setAdapter(adapter);
-
-        TextView headerText = (TextView) findViewById(R.id.header_text);
-        TextView addNewSetText = (TextView) findViewById(R.id.add_new_set_text);
     }
 
     public void addNewSet(View view) {
@@ -74,14 +72,10 @@ public class EditProgramExerciseActivity extends Activity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
         repsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -116,12 +110,6 @@ public class EditProgramExerciseActivity extends Activity {
         });
     }
 
-
-    private EditSetDialog createDialog() {
-        EditSetDialog.Builder adb = new EditSetDialog.Builder(this);
-        adb.setTitle("Add exercise");
-        return (EditSetDialog) adb.create();
-    }
 
 //    private void init(){
 //        FontUtils.setHeaderTypeFace(getAssets(), weightText);

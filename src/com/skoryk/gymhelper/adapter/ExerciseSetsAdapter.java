@@ -50,7 +50,7 @@ public class ExerciseSetsAdapter extends ArrayAdapter<Set> {
         }
 
         Set set = data.get(position);
-        holder.txtTitle.setText("Set No " + set.getSetNumber() + "   "
+        holder.txtTitle.setText(set.getSetNumber() + ")   "
                 + set.getWeight() + "kg   " + set.getReps() + " reps");
         int j = ((Activity) context).getResources().getIdentifier("set_icon", "drawable", ((Activity) context).getPackageName());
         holder.imgIcon.setImageResource(j);

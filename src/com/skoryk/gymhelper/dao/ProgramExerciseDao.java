@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.skoryk.gymhelper.R;
 import com.skoryk.gymhelper.entity.Exercise;
 import com.skoryk.gymhelper.entity.ProgramExercise;
+import com.skoryk.gymhelper.utils.Formats;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,16 +17,18 @@ public class ProgramExerciseDao {
     private Context context;
     private DBHelper dbHelper;
     private SQLiteDatabase db;
+    private SetDao setDao;
 
     public ProgramExerciseDao(Context context) {
         this.context = context;
         this.dbHelper = new DBHelper(context);
         db = dbHelper.getWritableDatabase();
+        setDao = new SetDao(context);
     }
 
-    public ArrayList<ProgramExercise> getProgramExercises(Date date) {
-        String query = context.getResources().getString(R.string.getProgramExercisesByDate);
-        Cursor c = db.rawQuery(query, new String[]{new SimpleDateFormat("dd-MMM-yyyy").format(date)});
+    public ArrayList<ProgramExercise> getProgramExercisesByTrainingId(Integer trainingId) {
+        String query = context.getResources().getString(R.string.getProgramExercisesByTrainingId);
+        Cursor c = db.rawQuery(query, new String[]{trainingId.toString()});
 
         ArrayList<ProgramExercise> programExerciseList = new ArrayList<ProgramExercise>();
         if (c != null) {
@@ -39,13 +42,14 @@ public class ProgramExerciseDao {
                     );
                     programExercise.setExercise(exercise);
                     try {
-                        programExercise.setDate(new SimpleDateFormat("dd-MMM-yyyy")
+                        programExercise.setDate(Formats.GYM_HELPER_DATE_FORMAT
                                 .parse(c.getString(c.getColumnIndex("date"))));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     programExercise.setTime(c.getString(c.getColumnIndex("time")));
-                    programExercise.setTrainingNumber(c.getInt(c.getColumnIndex("trainingNumber")));
+                    programExercise.setTrainingId(c.getInt(c.getColumnIndex("training_id")));
+                    programExercise.setSets(setDao.getExercisesSets(programExercise.getId()));
                     programExerciseList.add(programExercise);
                 } while (c.moveToNext());
             }
@@ -70,13 +74,13 @@ public class ProgramExerciseDao {
                     );
                     programExercise.setExercise(exercise);
                     try {
-                        programExercise.setDate(new SimpleDateFormat("dd-MMM-yyyy")
+                        programExercise.setDate(Formats.GYM_HELPER_DATE_FORMAT
                                 .parse(c.getString(c.getColumnIndex("date"))));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     programExercise.setTime(c.getString(c.getColumnIndex("time")));
-                    programExercise.setTrainingNumber(c.getInt(c.getColumnIndex("trainingNumber")));
+                    programExercise.setTrainingId(c.getInt(c.getColumnIndex("training_id")));
                     return programExercise;
                 } while (c.moveToNext());
             }
@@ -88,10 +92,10 @@ public class ProgramExerciseDao {
 
     public ProgramExercise createProgramExercise(ProgramExercise programExercise) {
         ContentValues cv = new ContentValues();
-        cv.put("date", new SimpleDateFormat("dd-MMM-yyyy").format(programExercise.getDate()));
-        cv.put("time", new SimpleDateFormat("HH-mm-ss").format(Calendar.getInstance().getTime()));
+        cv.put("date", Formats.GYM_HELPER_DATE_FORMAT.format(programExercise.getDate()));
+        cv.put("time", Formats.GYM_HELPER_TIME_FORMAT.format(Calendar.getInstance().getTime()));
         cv.put("exercise_id", programExercise.getExercise().getId().toString());
-        cv.put("training_number", programExercise.getTrainingNumber().toString());
+        cv.put("training_id", programExercise.getTrainingId().toString());
 
         Long rowID = db.insert("program_exercises", null, cv);
 

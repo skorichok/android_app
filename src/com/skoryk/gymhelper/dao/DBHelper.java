@@ -15,6 +15,7 @@ class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(context.getResources().getString(R.string.createTrainings));
         db.execSQL(context.getResources().getString(R.string.createExercises));
         db.execSQL(context.getResources().getString(R.string.createProgramExercises));
         db.execSQL(context.getResources().getString(R.string.createSets));
